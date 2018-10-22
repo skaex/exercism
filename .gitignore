@@ -1,1 +1,4 @@
 .solution.json
+.idea
+npm-debug.log
+.DS_Store
