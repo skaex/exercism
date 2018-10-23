@@ -2,3 +2,7 @@
 .idea
 npm-debug.log
 .DS_Store
+
+# JS and TS
+node_modules/
+*.lock
