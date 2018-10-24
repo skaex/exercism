@@ -2,13 +2,9 @@
  * That's a lot of seconds
  */
 export default class Gigasecond {
-  readonly starting: Date
-
-  constructor(starting: Date) {
-    this.starting = starting
-  }
+  constructor(private readonly _starting: Date) {}
 
   date(): Date {
-    return new Date(this.starting.getTime() + Math.pow(10, 12))
+    return new Date(this._starting.getTime() + Math.pow(10, 12))
   }
 }
