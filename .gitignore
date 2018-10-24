@@ -6,6 +6,7 @@ npm-debug.log
 # JS and TS
 node_modules/
 *.lock
+package.json
 
 # Ignore markdowns
 *.md
