@@ -7,6 +7,8 @@ npm-debug.log
 node_modules/
 *.lock
 package.json
+tsconfig.json
+tslint.json
 
 # Ignore markdowns
 *.md
