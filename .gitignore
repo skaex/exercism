@@ -6,3 +6,10 @@ npm-debug.log
 # JS and TS
 node_modules/
 *.lock
+
+# Ignore markdowns
+*.md
+
+
+# Ignore tests
+*test.*
