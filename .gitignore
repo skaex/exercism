@@ -18,3 +18,12 @@ tslint.json
 *test.*
 *tests.*
 *spec.*
+*Tests.*
+*Tests*
+
+# Swift
+*.playground
+.build
+.xcodeproj
+*Package.swift
+.gitignore
