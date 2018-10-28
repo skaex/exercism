@@ -1,12 +1,16 @@
 export default class Word {
-  count(phrase: string): object {
-    return phrase.split(' ').reduce((prev, curr) => {
-      if (prev[curr]) {
-        prev[curr] += 1
-      } else {
-        prev[curr] = 1
-      }
-      return prev
-    }, {})
+  count(phrase: string): Map<string, number> {
+    const wordCount: Map<string, number> = new Map()
+
+    phrase
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .forEach((curr) => {
+        const count: number | undefined = wordCount.get(curr)
+        count ? wordCount.set(curr, count + 1) : wordCount.set(curr, 1)
+      })
+
+    return wordCount
   }
 }
