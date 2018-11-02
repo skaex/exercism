@@ -27,3 +27,6 @@ tslint.json
 .xcodeproj
 *Package.swift
 .gitignore
+
+# Python
+*pycache*
