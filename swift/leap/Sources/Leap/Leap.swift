@@ -1,5 +1,5 @@
 /**
- Swift's Monkey patching
+ Extending the Int type to check for divisibility
 */
 extension Int {
    func isDivisibleBy(divisor: Int) -> Bool {
@@ -8,18 +8,16 @@ extension Int {
 }
 
 /**
- A struct or class? any will do.
+ A Year class.
  */
-struct Year {
+class Year {
    let calendarYear: Int
-   
-   var isLeapYear: Bool {
-      return self.calendarYear.isDivisibleBy(divisor: 4) &&
-         (!self.calendarYear.isDivisibleBy(divisor: 100) || self.calendarYear.isDivisibleBy(divisor: 400)
-         )
-   }
+   let isLeapYear: Bool
    
    init(calendarYear: Int) {
       self.calendarYear = calendarYear;
+      self.isLeapYear = calendarYear.isDivisibleBy(divisor: 4) &&
+         (!calendarYear.isDivisibleBy(divisor: 100) || calendarYear.isDivisibleBy(divisor: 400)
+      )
    }
 }
