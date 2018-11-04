@@ -4,18 +4,15 @@ export default class Transcriptor {
   }
 
   toRna(strand) {
-    const rnaStrand = strand
-      .split('')
-      .map(nucleotide => this.complement(nucleotide))
-      .join('');
+    let rnaStrand = '';
 
-    if (rnaStrand.length !== strand.length) {
-      throw new Error('Invalid input DNA.');
-    }
+    strand.split('').forEach((nucleotide) => {
+      if (!this.mapper[nucleotide]) {
+        throw new Error('Invalid input DNA.');
+      }
+      rnaStrand += this.mapper[nucleotide];
+    });
+
     return rnaStrand;
-  }
-
-  complement(nucleotide) {
-    return this.mapper[nucleotide] || '';
   }
 }
