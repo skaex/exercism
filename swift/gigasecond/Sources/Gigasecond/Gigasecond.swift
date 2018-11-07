@@ -2,7 +2,7 @@ import Foundation
 
 struct Gigasecond {
    
-   var description = ""
+   let description: String
    
    init?(from: String) {
       let dateFormatter = DateFormatter()
@@ -15,6 +15,8 @@ struct Gigasecond {
          self.description = dateFormatter.string(
             from: Date(timeInterval: 1_000_000_000, since: startDate)
          )
+      } else {
+         return nil
       }
    }
 }
