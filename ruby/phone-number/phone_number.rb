@@ -1,9 +1,12 @@
 # Cleaning phone numbers
 class PhoneNumber
   def self.clean(number)
-    number.gsub!(/((^\()|(^\+{0,1}1{0,1}\s*)|\.|\s|\(|\)|-|\D)/, '')
-    return nil unless number.size == 10
+    cleaned = number.gsub(/\D/, '').gsub(/^1*0*/, '')
+    return cleaned if cleaned.size.eql? 10
 
-    number
+    nil
   end
 end
+
+# x = "1 (023) 456-7890"
+# p "#{x} -> #{PhoneNumber.clean(x)}"
