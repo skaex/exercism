@@ -1,7 +1,7 @@
 # I see it too
 class Matrix
   def initialize(input)
-    @grid = input.split("\n").map { |a| a.split(' ').map(&:to_i) }
+    @grid = input.each_line.map { |a| a.split(' ').map(&:to_i) }
   end
 
   def rows
