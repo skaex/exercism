@@ -1,10 +1,13 @@
+// Package twofer : Exercism -> Go -> TwoFer.
 package twofer
 
-// ShareWith should have a comment documenting it.
+import "fmt"
+
+// ShareWith some: One for <name> and one for me.
 func ShareWith(name string) string {
 	if name == "" {
 		name = "you"
 	}
 
-	return "One for " + name + ", one for me."
+	return fmt.Sprintf("One for %s, one for me.", name)
 }
