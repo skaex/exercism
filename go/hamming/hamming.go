@@ -10,7 +10,7 @@ func Distance(a, b string) (int, error) {
 	}
 
 	distance := 0
-	for index := 0; index < len(a); index++ {
+	for index := range(a) {
 		if a[index] != b[index] {
 			distance++
 		}
