@@ -30,3 +30,12 @@ tslint.json
 
 # Python
 *pycache*
+
+# Dartlang
+sdk-version
+
+
+# Dartlang
+sdk-version
+.packages
+analysis_options.yaml
