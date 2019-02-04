@@ -7,9 +7,11 @@ class Phrase
   end
 
   def word_count
-    phrase.strip.split(/[\s,]+/).each_with_object({}) do |word, object|
-      key = word.gsub(/\A[\W]+|[\W]+\z/, '').downcase
-      object[key] = object[key].to_i + 1
-    end
+    phrase
+      .downcase
+      .scan(/\b[\w']+\b/)
+      .each_with_object({}) do |word, object|
+        object[word] = object[word].to_i + 1
+      end
   end
 end
