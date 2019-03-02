@@ -1,7 +1,5 @@
 # Luhn calculates validity of digits using luhns formular
 class Luhn
-  attr_reader :digits, :input_wos
-
   def self.valid?(digits)
     new(digits).valid?
   end
@@ -18,6 +16,8 @@ class Luhn
   end
 
   private
+
+  attr_reader :digits, :input_wos
 
   def two_or_more_digits?
     digits.size > 1
