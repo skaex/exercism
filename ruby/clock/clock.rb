@@ -1,17 +1,17 @@
 # Clock class for exercism.io
 class Clock
-  def initialize(hour: 0, minute: 0)
-    @minutes = 0
+  attr_reader :minutes
 
-    add!(hour, minute)
+  def initialize(hour: 0, minute: 0)
+    @minutes = ((hour * 60) + minute) % 1440
   end
 
   def hour
-    (@minutes / 60) % 24
+    (minutes / 60) % 24
   end
 
   def minute
-    @minutes - (@minutes / 60) * 60
+    minutes % 60
   end
 
   def to_s
@@ -19,25 +19,14 @@ class Clock
   end
 
   def +(other)
-    add!(other.hour, other.minute)
-
-    self
+    self.class.new(minute: minutes + other.minutes)
   end
 
   def -(other)
-    add!(-other.hour, -other.minute)
-
-    self
+    self.class.new(minute: minutes - other.minutes)
   end
 
   def ==(other)
-    hour.eql?(other.hour) &&
-      minute.eql?(other.minute)
-  end
-
-  private
-
-  def add!(hrs, mins)
-    @minutes += (hrs * 60) + mins
+    minutes.eql?(other.minutes)
   end
 end
