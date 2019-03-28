@@ -1,17 +1,7 @@
 # Clock class for exercism.io
 class Clock
-  attr_reader :minutes
-
   def initialize(hour: 0, minute: 0)
     @minutes = ((hour * 60) + minute) % 1440
-  end
-
-  def hour
-    (minutes / 60) % 24
-  end
-
-  def minute
-    minutes % 60
   end
 
   def to_s
@@ -28,5 +18,19 @@ class Clock
 
   def ==(other)
     minutes.eql?(other.minutes)
+  end
+
+  protected
+
+  attr_reader :minutes
+
+  private
+
+  def hour
+    (minutes / 60) % 24
+  end
+
+  def minute
+    minutes % 60
   end
 end
