@@ -39,3 +39,6 @@ sdk-version
 sdk-version
 .packages
 analysis_options.yaml
+
+# Text files
+*.txt
