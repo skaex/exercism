@@ -1,6 +1,6 @@
 # Twelve Days of Christmas exercise on exercism
 class TwelveDays
-  DAYS_GOODIES = [
+  DAYS_GIFTS = [
     ['first', 'a Partridge in a Pear Tree'],
     ['second', 'two Turtle Doves'],
     ['third', 'three French Hens'],
@@ -15,29 +15,28 @@ class TwelveDays
     ['twelfth', 'twelve Drummers Drumming']
   ].freeze
 
+  GIFTS = DAYS_GIFTS.map { |_, gift| gift }
+
   def self.song
-    new.song_string
+    new.song
   end
 
-  def song_string
-    DAYS_GOODIES.map.with_index do |(day, _), index|
-      construct_line(day, day_goodies(index))
+  def song
+    DAYS_GIFTS.map.with_index do |(day, _), index|
+      verse(day, day_gifts(index))
     end.join("\n")
   end
 
   private
 
-  def construct_line(day, goodies)
-    "On the #{day} day of Christmas my true love gave to me: #{goodies}.\n"
+  def verse(day, gifts)
+    "On the #{day} day of Christmas my true love gave to me: #{gifts}.\n"
   end
 
-  def day_goodies(index)
-    goodies = DAYS_GOODIES.map { |_, goody| goody }
-    if index < 1
-      goodies[index]
-    else
-      (goodies[1..index].reverse + ["and #{goodies[0]}"]).join(', ')
-    end
+  def day_gifts(index)
+    *gifts, last_gift = GIFTS[0..index].reverse
+    return last_gift if index.zero?
+
+    (gifts + ["and #{last_gift}"]).join(', ')
   end
 end
-
