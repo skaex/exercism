@@ -1,35 +1,23 @@
+// Package diffsquares implements the difference of squares exercise from
+// exercism.io
 package diffsquares
 
-// SquareOfSum function
+// SquareOfSum calculates the square of sums from 1 to n
 func SquareOfSum(n int) int {
-	// O(n) approach
-	sum := 0
-
-	for i := 0; i <= n; i++ {
-		sum += i
-	}
-
-	// Alternatively in O(1)
-	// sum := n * (n + 1) / 2
+	sum := n * (n + 1) / 2
 
 	return sum * sum
 }
 
-// SumOfSquares function
+// SumOfSquares calculates the sum of squares from 1 to n
 func SumOfSquares(n int) int {
-	sum := 0
-
-	for i := 0; i <= n; i++ {
-		sum += i * i
-	}
-
-	// Alternatively in O(1)
-	// sum := n * (n + 1) * (2*n + 1) / 6
+	sum := n * (n + 1) * (2*n + 1) / 6
 
 	return sum
 }
 
-// Difference function
+// Difference calculates the difference between the square of sums and sum of
+// squares from 1 to n
 func Difference(n int) int {
 	return SquareOfSum(n) - SumOfSquares(n)
 }
