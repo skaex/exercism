@@ -42,3 +42,7 @@ analysis_options.yaml
 
 # Text files
 *.txt
+
+# Elm
+tests/
+elm.json
