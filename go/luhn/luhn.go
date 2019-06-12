@@ -9,8 +9,7 @@ import (
 
 // Valid determines if input string is a valid luhn sequence
 func Valid(input string) bool {
-	spaceRegex := regexp.MustCompile(`\s`)
-	input = spaceRegex.ReplaceAllString(input, "")
+	input = strings.ReplaceAll(input, " ", "")
 
 	nonDigitRegex := regexp.MustCompile(`\D`)
 
