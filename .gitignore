@@ -46,3 +46,4 @@ analysis_options.yaml
 # Elm
 tests/
 elm.json
+elm-stuff
