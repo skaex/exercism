@@ -15,13 +15,14 @@ func Valid(input string) bool {
 
 	sum := 0
 
-	for idx := range input {
-		num := int(input[size-idx-1] - '0')
+	double := size%2 == 0
+	for _, r := range input {
+		num := int(r - '0')
 		if num < 0 || num > 9 {
 			return false
 		}
 
-		if idx%2 == 1 {
+		if double {
 			doubled := num * 2
 			if doubled > 9 {
 				doubled -= 9
@@ -30,6 +31,7 @@ func Valid(input string) bool {
 		} else {
 			sum += num
 		}
+		double = !double
 	}
 
 	return sum%10 == 0
