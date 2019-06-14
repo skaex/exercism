@@ -23,14 +23,12 @@ func Valid(input string) bool {
 		}
 
 		if double {
-			doubled := num * 2
-			if doubled > 9 {
-				doubled -= 9
+			num *= 2
+			if num > 9 {
+				num -= 9
 			}
-			sum += doubled
-		} else {
-			sum += num
 		}
+		sum += num
 		double = !double
 	}
 
