@@ -5,12 +5,7 @@ import "errors"
 
 // Total calculate total number of grains on the chessboard
 func Total() uint64 {
-	total := uint64(1)
-	for i := 1; i < 64; i++ {
-		total += 1 << uint64(i)
-	}
-
-	return total
+	return 1<<64 - 1
 }
 
 // Square calculates the total number of square on a chessboard square
