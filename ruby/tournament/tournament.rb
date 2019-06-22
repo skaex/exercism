@@ -15,7 +15,7 @@ class Tournament
   def tally(input)
     input.each_line { |line| record(line.chomp) }
 
-    result = result().sort_by { |name, v| [-v[4], name] }
+    result = self.result.sort_by { |name, v| [-v[4], name] }
 
     result.unshift(['Team', %w[MP W D L P]])
 
