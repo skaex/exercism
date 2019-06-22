@@ -2,6 +2,8 @@
 
 # Tournament class from ruby track in exercism
 class Tournament
+  attr_accessor :result
+
   def self.tally(input)
     new.tally(input)
   end
@@ -11,13 +13,13 @@ class Tournament
   end
 
   def tally(input)
-    input.split("\n").each { |line| record(line) }
+    input.each_line { |line| record(line.chomp) }
 
-    @result = @result.sort_by { |name, v| [-v[4], name] }
+    result = result().sort_by { |name, v| [-v[4], name] }
 
-    @result.unshift(['Team', %w[MP W D L P]])
+    result.unshift(['Team', %w[MP W D L P]])
 
-    @result.map { |team, entry| format_entry(team, entry) }.join
+    result.map { |team, entry| format_entry(team, entry) }.join
   end
 
   private
@@ -43,25 +45,25 @@ class Tournament
   end
 
   def record_win(team)
-    record = @result[team] || [0, 0, 0, 0, 0]
+    record = result[team] || [0, 0, 0, 0, 0]
     record[0] += 1
     record[1] += 1
     record[4] += 3
-    @result[team] = record
+    result[team] = record
   end
 
   def record_loss(team)
-    record = @result[team] || [0, 0, 0, 0, 0]
+    record = result[team] || [0, 0, 0, 0, 0]
     record[0] += 1
     record[3] += 1
-    @result[team] = record
+    result[team] = record
   end
 
   def record_draw(team)
-    record = @result[team] || [0, 0, 0, 0, 0]
+    record = result[team] || [0, 0, 0, 0, 0]
     record[0] += 1
     record[2] += 1
     record[4] += 1
-    @result[team] = record
+    result[team] = record
   end
 end
