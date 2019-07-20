@@ -1,10 +1,6 @@
 // Package letter implements parallel exercise from exercism.io
 package letter
 
-import (
-	"sync"
-)
-
 // FreqMap records the frequency of each rune in a given text.
 type FreqMap map[rune]int
 
@@ -22,16 +18,16 @@ func Frequency(s string) FreqMap {
 // frequency of input strings
 func ConcurrentFrequency(strings []string) FreqMap {
 	store := FreqMap{}
-	var wg sync.WaitGroup
+	pipe := make(chan FreqMap)
 	for _, str := range strings {
-		wg.Add(1)
-		go func(input string, wg *sync.WaitGroup) {
-			store.combine(Frequency(input))
-			wg.Done()
-		}(str, &wg)
+		go func(input string, frChan chan FreqMap) {
+			frChan <- Frequency(input)
+		}(str, pipe)
 	}
 
-	wg.Wait()
+	for range strings {
+		store.combine(<-pipe)
+	}
 
 	return store
 }
