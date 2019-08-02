@@ -18,23 +18,18 @@ func Frequency(s string) FreqMap {
 // frequency of input strings
 func ConcurrentFrequency(strings []string) FreqMap {
 	store := FreqMap{}
-	pipe := make(chan FreqMap)
+	results := make(chan FreqMap)
 	for _, str := range strings {
 		go func(input string, frChan chan FreqMap) {
 			frChan <- Frequency(input)
-		}(str, pipe)
+		}(str, results)
 	}
 
 	for range strings {
-		store.combine(<-pipe)
+		for k, v := range <-results {
+			store[k] += v
+		}
 	}
 
 	return store
-}
-
-// combines helps merge two FreqMaps types
-func (fm FreqMap) combine(newFm FreqMap) {
-	for k, v := range newFm {
-		fm[k] += v
-	}
 }
