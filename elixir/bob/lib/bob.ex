@@ -1,5 +1,5 @@
 defmodule Bob do
-  def hey(input) do
+   def hey(input) do
     input = String.trim input
     cond do
       nothing? input -> "Fine. Be that way!"
@@ -10,19 +10,19 @@ defmodule Bob do
     end
   end
 
-  def question? input do
+  defp question? input do
     String.ends_with? input, "?"
   end
 
-  def nothing? input do
+  defp nothing? input do
     String.length(input) == 0
   end
 
-  def yell? input do
+  defp yell? input do
     String.upcase(input) == input && String.match?(input, ~r/\p{L}/)
   end
 
-  def yell_question? input do
+  defp yell_question? input do
     yell?(input) && question?(input)
   end
 end
