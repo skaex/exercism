@@ -48,3 +48,9 @@ analysis_options.yaml
 tests/
 elm.json
 elm-stuff
+
+# Haskell
+.stack-work
+*.cabal
+package.yaml
+stack.yaml
