@@ -5,4 +5,6 @@ module Pangram
 import Data.Char
 
 isPangram :: String -> Bool
-isPangram text = all (`elem` [toLower ch | ch <- text]) ['a' .. 'z']
+isPangram text = all (`elem` lowerCased) ['a' .. 'z']
+  where
+    lowerCased = [toLower ch | ch <- text]
