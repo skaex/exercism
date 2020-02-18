@@ -1,53 +1,44 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Bob
   ( responseFor
   ) where
 
 import Data.Char
+import qualified Data.Text as T
+import           Data.Text (Text)
 
-data Conversation
+data Diction
   = Question
   | Yelling
   | YellQuestion
-  | NoConversation
-  | OtherConversation
+  | NoDiction
+  | OtherDiction
 
-isAllCaps :: String -> Bool
-isAllCaps s
-  | null s = False
-  | otherwise = all isUpper s
+isQuestion :: Text -> Bool
+isQuestion = T.isSuffixOf "?" . T.strip
 
-endsWith :: Char -> String -> Bool
-endsWith ch = (==) ch . last
+isYell :: Text -> Bool
+isYell s = T.any isAlpha s && s == T.toUpper s
 
-isQuestion :: String -> Bool
-isQuestion = endsWith '?'
+isYellQuestion :: Text -> Bool
+isYellQuestion s = isYell s && isQuestion s
 
-isYell :: String -> Bool
-isYell = isAllCaps
+isNoDiction :: Text -> Bool
+isNoDiction = T.all isSpace
 
-isYellQuestion :: String -> Bool
-isYellQuestion s = isYell (init s) && isQuestion s
+figureDiction :: Text -> Diction
+figureDiction t
+  | isNoDiction t = NoDiction
+  | isYellQuestion t = YellQuestion
+  | isQuestion t = Question
+  | isYell t = Yelling
+  | otherwise = OtherDiction
 
-isNoConversation :: String -> Bool
-isNoConversation = null
-
-figureConversation :: String -> Conversation
-figureConversation s
-  | relevant && isYellQuestion xs = YellQuestion
-  | relevant && isQuestion xs = Question
-  | relevant && isYell xs = Yelling
-  | isNoConversation xs && isNoConversation ys = NoConversation
-  | otherwise = OtherConversation
-  where
-    xs = filter (\c -> isAlpha c || c == '?') s
-    ys = filter isAlphaNum s
-    relevant = not (isNoConversation xs)
-
-responseFor :: String -> String
+responseFor :: Text -> Text
 responseFor xs =
-  case figureConversation xs of
+  case figureDiction xs of
     Question -> "Sure."
     Yelling -> "Whoa, chill out!"
     YellQuestion -> "Calm down, I know what I'm doing!"
-    NoConversation -> "Fine. Be that way!"
-    OtherConversation -> "Whatever."
+    NoDiction -> "Fine. Be that way!"
+    OtherDiction -> "Whatever."
