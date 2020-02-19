@@ -1,11 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
+
 module Bob
   ( responseFor
   ) where
 
 import Data.Char
+import Data.Text (Text)
 import qualified Data.Text as T
-import           Data.Text (Text)
 
 data Diction
   = Question
@@ -15,10 +16,10 @@ data Diction
   | OtherDiction
 
 isQuestion :: Text -> Bool
-isQuestion = T.isSuffixOf "?" . T.strip
+isQuestion = T.isSuffixOf "?" . T.stripEnd
 
 isYell :: Text -> Bool
-isYell s = T.any isAlpha s && s == T.toUpper s
+isYell s = T.any isAlpha s && not (T.any isLower s)
 
 isYellQuestion :: Text -> Bool
 isYellQuestion s = isYell s && isQuestion s
