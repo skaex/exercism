@@ -21,16 +21,12 @@ charToNucleotide c =
     'T' -> Just T
     _ -> Nothing
 
-nucleotideCount ::
-     String -> Map Nucleotide Int -> Either String (Map Nucleotide Int)
-nucleotideCount [] m = Right m
-nucleotideCount (x:xs) m =
-  case converted of
-    Nothing -> Left (x : xs)
-    Just nucleotide -> nucleotideCount xs (adjust (+ 1) nucleotide m)
-  where
-    converted = charToNucleotide x
+converter :: Char -> Either String (Map Nucleotide Int) -> Either String (Map Nucleotide Int)
+converter c (Left s) = Left (c : s)
+converter c (Right m) = case charToNucleotide c of
+                  Just nucleotide -> Right (adjust (+ 1) nucleotide m) 
+                  Nothing -> Left [c]
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts xs =
-  nucleotideCount xs (fromList [(A, 0), (C, 0), (G, 0), (T, 0)])
+nucleotideCounts =
+   foldr converter (Right (fromList [(A, 0), (C, 0), (G, 0), (T, 0)]))
