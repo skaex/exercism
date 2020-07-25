@@ -7,15 +7,7 @@ distance left right =
         Err "left and right strands must be of equal length"
 
     else
-        List.map2
-            (\a b ->
-                if a == b then
-                    0
-
-                else
-                    1
-            )
-            (String.toList left)
-            (String.toList right)
-            |> List.sum
+        List.map2 (/=) (String.toList left) (String.toList right)
+            |> List.filter identity
+            |> List.length
             |> Ok
