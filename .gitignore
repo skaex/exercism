@@ -54,3 +54,6 @@ elm-stuff
 *.cabal
 package.yaml
 stack.yaml
+
+# Rust
+*.toml
