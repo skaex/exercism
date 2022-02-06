@@ -57,3 +57,4 @@ stack.yaml
 
 # Rust
 *.toml
+target/
